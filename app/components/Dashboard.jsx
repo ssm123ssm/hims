@@ -40,10 +40,13 @@ import {
   faFileLines,
   faHouse,
   faSearch,
+  faArrowTrendUp,
+  faArrowTrendDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import Loading from "./Loading";
 import Scroller from "./Scroller";
+import Trend from "./Trend";
 
 const Dashboard = () => {
   let [beds, setBeds] = useState([]);
@@ -258,17 +261,22 @@ const Dashboard = () => {
                           {bed.date_of_leak_over.slice(-1)}
                         </span>
                         {bed.date_of_leak_over[0] ? (
-                          //Calculating how many hours left for the leaking finishes
-                          bed.date_of_leak_over.slice(-1) && (
-                            <span className="text-gray-500 text-xs">
-                              {Math.floor(
-                                (new Date(bed.date_of_leak_over.slice(-1)) -
-                                  new Date()) /
-                                  (1000 * 60 * 60)
-                              )}{" "}
-                              hours left
-                            </span>
-                          )
+                          //Calculating how many hours and minutes left for the leaking finishes
+                          <span className="text-gray-500 text-xs">
+                            {Math.floor(
+                              (new Date(bed.date_of_leak_over[0]) -
+                                new Date()) /
+                                3600000
+                            )}{" "}
+                            hours and{" "}
+                            {Math.floor(
+                              ((new Date(bed.date_of_leak_over[0]) -
+                                new Date()) /
+                                60000) %
+                                60
+                            )}{" "}
+                            minutes left
+                          </span>
                         ) : (
                           <> </>
                         )}
@@ -293,6 +301,7 @@ const Dashboard = () => {
                             <span className="text-gray-700 flex">
                               {bed.plt.slice(-1)}
                             </span>
+                            <Trend props={{ data: bed.plt, good: "high" }} />
                             <span
                               className="text-gray-500 text-xs flex hover:cursor-pointer"
                               name="plt"
@@ -305,44 +314,54 @@ const Dashboard = () => {
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">CRP</span>
-                        <span className="text-gray-700">
-                          {bed.crp.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="crp"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.crp.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.crp, good: "low" }} />
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="crp"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            {" "}
+                            +
+                          </span>
+                        </div>
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">
                           Serum creatinine
                         </span>
-                        <span className="text-gray-700">
-                          {bed.scr.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="scr"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.scr.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.scr, good: "low" }} />
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="scr"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            +
+                          </span>
+                        </div>
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">WBC</span>
-                        <span className="text-gray-700">
-                          {bed.wbc.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="wbc"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.wbc.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.wbc, good: "high" }} />
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="wbc"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            +
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div className="flex flex-col gap-5 justify-between">
@@ -352,12 +371,31 @@ const Dashboard = () => {
                           <span className="text-gray-500 text-xs flex">
                             SGOT
                           </span>
-                          <span className="text-gray-700 flex">
-                            {bed.sgot.slice(-1)}
+                          <div className="flex flex-r">
+                            <span className="text-gray-700 flex">
+                              {bed.sgot.slice(-1)}
+                            </span>
+                            <Trend props={{ data: bed.sgot, good: "low" }} />
+                            <span
+                              className="text-gray-500 text-xs flex hover:cursor-pointer"
+                              name="sgot"
+                              onClick={(e) => handleIx(e, bed._id)}
+                            >
+                              +
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex-col flex">
+                        <span className="text-gray-500 text-xs">SGPT</span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.sgpt.slice(-1)}
                           </span>
+                          <Trend props={{ data: bed.sgpt, good: "low" }} />
                           <span
                             className="text-gray-500 text-xs flex hover:cursor-pointer"
-                            name="sgot"
+                            name="sgpt"
                             onClick={(e) => handleIx(e, bed._id)}
                           >
                             +
@@ -365,58 +403,56 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <div className="flex-col flex">
-                        <span className="text-gray-500 text-xs">SGPT</span>
-                        <span className="text-gray-700">
-                          {bed.sgpt.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="sgpt"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
-                      </div>
-                      <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">Hb</span>
-                        <span className="text-gray-700">
-                          {bed.hb.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="hb"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.hb.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.hb, good: "high" }} />
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="hb"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            +
+                          </span>
+                        </div>
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">INR</span>
-                        <span className="text-gray-700">
-                          {bed.inr.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="inr"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.inr.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.inr, good: "low" }} />
+
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="inr"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            +
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div className="flex flex-col gap-5">
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">PCV</span>
-                        <span className="text-gray-700">
-                          {bed.pcv.slice(-1)}
-                        </span>
-                        <span
-                          className="text-gray-500 text-xs flex hover:cursor-pointer"
-                          name="pcv"
-                          onClick={(e) => handleIx(e, bed._id)}
-                        >
-                          +
-                        </span>
+                        <div className="flex flex-r">
+                          <span className="text-gray-700">
+                            {bed.pcv.slice(-1)}
+                          </span>
+                          <Trend props={{ data: bed.pcv, good: "high" }} />
+
+                          <span
+                            className="text-gray-500 text-xs flex hover:cursor-pointer"
+                            name="pcv"
+                            onClick={(e) => handleIx(e, bed._id)}
+                          >
+                            +
+                          </span>
+                        </div>
                       </div>
                       <div className="flex justify-start">
                         <div className="flex flex-col">

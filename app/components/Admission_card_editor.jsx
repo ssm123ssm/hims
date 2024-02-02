@@ -127,7 +127,7 @@ const Admission_card = ({ props: data }) => {
               />
 
               <Input
-                type="date"
+                type="datetime-local"
                 label="Date of leak over"
                 name="date_of_leak_over"
                 onChange={handleChange}
