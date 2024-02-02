@@ -257,6 +257,21 @@ const Dashboard = () => {
                         <span className="text-gray-700">
                           {bed.date_of_leak_over.slice(-1)}
                         </span>
+                        {bed.date_of_leak_over[0] ? (
+                          //Calculating how many hours left for the leaking finishes
+                          bed.date_of_leak_over.slice(-1) && (
+                            <span className="text-gray-500 text-xs">
+                              {Math.floor(
+                                (new Date(bed.date_of_leak_over.slice(-1)) -
+                                  new Date()) /
+                                  (1000 * 60 * 60)
+                              )}{" "}
+                              hours left
+                            </span>
+                          )
+                        ) : (
+                          <> </>
+                        )}
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">VOTS</span>

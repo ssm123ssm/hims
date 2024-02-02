@@ -55,7 +55,7 @@ const Admission_card = ({ props: data }) => {
       [name]:
         pr[name].length === 0
           ? [value] // If the array is empty, create a new array with the value
-          : pr[name].map((item, index) => (index === 0 ? +value : item)),
+          : pr[name].map((item, index) => (index === 0 ? value : item)),
     }));
 
     console.log(form);
@@ -89,7 +89,7 @@ const Admission_card = ({ props: data }) => {
                   name="first_name"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.first_name}
+                  defaultValue={data?.first_name[0]}
                 />
               </div>
               <Input
@@ -98,7 +98,7 @@ const Admission_card = ({ props: data }) => {
                 name="age"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.age}
+                defaultValue={data?.age[0]}
               />
               <Input
                 type="text"
@@ -106,7 +106,7 @@ const Admission_card = ({ props: data }) => {
                 name="bht_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bht_number}
+                defaultValue={data?.bht_number[0]}
               />
               <Input
                 type="text"
@@ -114,7 +114,7 @@ const Admission_card = ({ props: data }) => {
                 name="bed_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bed_number}
+                defaultValue={data?.bed_number[0]}
               />
 
               <Input
@@ -123,7 +123,7 @@ const Admission_card = ({ props: data }) => {
                 name="date_of_fever"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.date_of_fever}
+                defaultValue={data?.date_of_fever[0]}
               />
 
               <Input
@@ -133,7 +133,7 @@ const Admission_card = ({ props: data }) => {
                 onChange={handleChange}
                 size="sm"
                 labelPlacement="outside-left"
-                defaultValue={data?.date_of_leak_over}
+                defaultValue={data?.date_of_leak_over[0]}
               />
 
               <div className="flex gap-5 justify-evenly flex-col">
