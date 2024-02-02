@@ -55,6 +55,7 @@ const Nav = () => {
             href="/dashboard"
             aria-current="page"
             className="text-purple-500 font-bold"
+            prefetch={false}
           >
             Dashboard
           </Link>
