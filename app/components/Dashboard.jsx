@@ -99,6 +99,7 @@ const Dashboard = () => {
 
   const handleSearchChange = (e) => {
     const id = e;
+    console.log(id);
     if (e) {
       beds.forEach((element) => {
         element.visible = false;
@@ -138,11 +139,8 @@ const Dashboard = () => {
               labelPlacement="outside"
             >
               {beds.map((bed) => (
-                <AutocompleteItem
-                  key={bed._id}
-                  value={bed.first_name.slice(-1)}
-                >
-                  {bed.first_name.slice(-1)}
+                <AutocompleteItem key={bed._id} value={bed.first_name[0]}>
+                  {bed.first_name[0]}
                 </AutocompleteItem>
               ))}
             </Autocomplete>

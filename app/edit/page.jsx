@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Admission_card_editor from "../components/Admission_card_editor";
 import { Skeleton } from "@nextui-org/react";
 import Loading from "../components/Loading";
+import Scroller from "../components/Scroller";
 
 const Page = () => {
   const [bedLoaded, setBedLoaded] = useState(false);
@@ -13,6 +14,7 @@ const Page = () => {
   const id = useSearchParams().get("id");
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchBedData = async () => {
       try {
         //simulate a delay
@@ -40,6 +42,7 @@ const Page = () => {
 
   return (
     <div>
+      <Scroller />
       {!bedLoaded ? (
         <div className="space-y-5 p-4 w-[800px]">
           <Loading />

@@ -1,9 +1,11 @@
 import React from "react";
 import { Skeleton } from "@nextui-org/react";
+import Scroller from "./Scroller";
 
 const Loading = () => {
   return (
     <div>
+      <Scroller />
       <div className="space-y-5 p-4 w-[600px]">
         <div className="space-y-3">
           <Skeleton style={{ borderRadius: "0.25rem" }} className="w-3/5">
