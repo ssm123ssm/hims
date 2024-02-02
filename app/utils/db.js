@@ -1,6 +1,8 @@
 import { cache } from "react";
 import Bed from "../(models)/bed";
 
+export const fetchCache = "force-no-store";
+
 export const getItems = cache(async (id) => {
   console.log("getItems");
 
