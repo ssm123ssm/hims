@@ -26,6 +26,7 @@ const bedSchema = new Schema(
     vots: [Number],
     wbc: [Number],
     ultrasound_findings: [String],
+    status: [String],
   },
   {
     timestamps: true,

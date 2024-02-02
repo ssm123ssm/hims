@@ -28,6 +28,7 @@ const Admission_card = () => {
     id: ["000"],
     ns1_status: ["Negative"],
     dexamethasone: ["No"],
+    status: ["active"],
   });
   const [submiting, setSubmiting] = useState(false);
   const router = useRouter();

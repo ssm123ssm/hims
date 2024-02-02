@@ -11,9 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Trend = ({ props: { data, good } }) => {
-  console.log(good);
-  console.log(data.slice(-1)[0]);
-  console.log(data.slice(-2)[0]);
   const up =
     good === "high" ? "text-green-500 mx-2 mt-1" : "text-red-500 mx-2 mt-1";
   const down =
