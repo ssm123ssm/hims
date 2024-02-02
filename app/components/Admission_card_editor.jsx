@@ -6,8 +6,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/react";
 import { RadioGroup, Radio } from "@nextui-org/react";
-import { Slider } from "@nextui-org/react";
-import { Spinner } from "@nextui-org/react";
 import {
   Card,
   CardHeader,
@@ -23,10 +21,14 @@ import {
 
 import React from "react";
 
+import { useDisclosure } from "@nextui-org/react";
+import Warnin_modal from "./Warnin_modal";
+
 const Admission_card = ({ props: data }) => {
   const [form, setForm] = useState(data);
   const [submiting, setSubmiting] = useState(false);
   const router = useRouter();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
@@ -72,8 +74,38 @@ const Admission_card = ({ props: data }) => {
     }
   };
 
+  const handleDelete = async () => {
+    console.log(`Deleting ${form._id}`);
+    const deleteBedData = async () => {
+      try {
+        const response = await fetch("/api/delete", {
+          method: "POST", // or "GET" depending on your server-side implementation
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: form._id }),
+        });
+
+        const data = await response.json();
+        onClose();
+        router.push("/dashboard");
+      } catch (error) {
+        console.error("Error fetching bed data:", error);
+      }
+    };
+
+    deleteBedData();
+  };
+
   return (
     <Card className=" p-4 my-4 justify-center mx-auto w-[800px]">
+      <Warnin_modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        onOpen={onOpen}
+        onDelete={handleDelete}
+        onClose={onClose}
+      />
       <CardHeader className="font-bold text-purple-500 flex justify-center mb-5">
         Edit card
       </CardHeader>
@@ -280,6 +312,9 @@ const Admission_card = ({ props: data }) => {
               Submit
             </Button>
           )}
+          <Button className="text-white" onPress={onOpen} color="danger">
+            Delete
+          </Button>
           <Button className="text-white bg-purple-400" onClick={handleCancel}>
             Cancel
           </Button>

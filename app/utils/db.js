@@ -23,3 +23,14 @@ export const getItem = cache(async (id) => {
     console.log(error);
   }
 });
+
+export const deleteItem = cache(async (id) => {
+  console.log("getOneItem");
+
+  try {
+    const bedsData = await Bed.findOneAndDelete({ _id: id }).exec();
+    return bedsData;
+  } catch (error) {
+    console.log(error);
+  }
+});
