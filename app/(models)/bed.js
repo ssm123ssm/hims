@@ -1,4 +1,5 @@
 // bed.js (model file)
+const mongoose = require("mongoose");
 import mongoose, { Schema } from "mongoose";
 
 mongoose.connect(process.env.MONGODB_URI);

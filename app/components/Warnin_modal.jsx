@@ -47,8 +47,8 @@ function Warnin_modal({
               </ModalHeader>
               <ModalBody>
                 <p>
-                  You are trying to delete this patient's card without
-                  discharging. This action is irreversible.
+                  You are trying to delete this card without discharging. This
+                  action is irreversible.
                 </p>
               </ModalBody>
               <ModalFooter>
