@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import Bed from "@/app/(models)/bed";
 import { getItem } from "@/app/utils/db";
+export const fetchCache = "force-no-store";
 
 export async function POST(req) {
   try {
