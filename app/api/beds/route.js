@@ -5,5 +5,9 @@ import { getItems } from "../../utils/db";
 export async function GET(req) {
   const beds = await getItems("beds");
   console.log(beds);
-  return NextResponse.json(beds);
+  return NextResponse.json(beds, {
+    headers: {
+      "Cache-Control": "no-store, max-age=0",
+    },
+  });
 }

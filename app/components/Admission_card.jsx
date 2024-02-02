@@ -1,7 +1,5 @@
 "use client";
 
-//This is the admission form component. This form should submit the form data to the mongodb database and then redirect to the dashboard page.
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/react";
