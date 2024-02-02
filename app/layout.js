@@ -7,7 +7,7 @@ import Loading from "./components/Loading";
 import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-export const fetchCache = "force-no-store";
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const metadata = {
   title: "Dengue",
