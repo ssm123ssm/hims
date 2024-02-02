@@ -2,6 +2,8 @@
 import { NextResponse } from "next/server";
 import { getItems } from "../../utils/db";
 
+export const fetchCache = "force-no-store";
+
 export async function GET(req) {
   const beds = await getItems("beds");
   console.log(beds);
