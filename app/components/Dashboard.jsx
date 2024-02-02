@@ -73,7 +73,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     console.log("Dashboard component mounted");
-    fetch("/api/beds", { cache: "no-store" })
+    fetch("/api/beds", { next: { revalidate: 0 } })
       .then((response) => response.json())
       .then((data) => {
         //add a key 'visible' to all the elemts in the array
