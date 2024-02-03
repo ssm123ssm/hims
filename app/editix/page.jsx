@@ -15,6 +15,7 @@ const Page = () => {
   const id = useSearchParams().get("id");
   const [bedLoaded, setBedLoaded] = useState(false);
   const [bedData, setBedData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [lineData, setLineData] = useState({
     labels: [],
     datasets: [
@@ -45,13 +46,18 @@ const Page = () => {
 
         const data = await response.json();
         console.log("data:", data[0][ix]);
-        setBedData(data[0]);
+        setUserData(data[0]);
+        //data[0][ix] is an array of objects with {value: value, timestamp: timestamp} format. Create two arrays from this data, one for the values and one for the timestamps.
+        const values = data[0][ix].map((item) => item.value);
+        const timestamps = data[0][ix].map((item) => item.timestamp);
+
+        setBedData({ values: values, timestamps: timestamps });
         setLineData({
-          labels: data[0][ix].map((item, index) => index),
+          labels: timestamps,
           datasets: [
             {
               label: ix,
-              data: data[0][ix],
+              data: values,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
@@ -70,27 +76,34 @@ const Page = () => {
   const handleProcess = async () => {
     setSubmitting(true);
     const newBedData = {
-      ...bedData,
-      [ix]: [...bedData[ix], parseFloat(newIx)],
+      values: [...bedData.values, newIx],
+      timestamps: [...bedData.timestamps, Date.now()],
+      _id: id,
+    };
+    const newUserData = {
+      ...userData,
+      [ix]: [...userData[ix], { value: newIx, timestamp: Date.now() }],
     };
 
+    setBedData((pr) => newBedData);
+    setUserData((pr) => newUserData);
+    console.log("userData:", userData);
     try {
       const res = await fetch("/api/edit", {
         method: "POST",
-        body: JSON.stringify({ form: newBedData }),
+        body: JSON.stringify({ form: newUserData }),
         headers: {
           "Content-Type": "application/json",
         },
       });
 
       if (res.ok) {
-        setBedData(newBedData);
         setLineData({
-          labels: newBedData[ix].map((item, index) => index),
+          labels: newBedData.timestamps,
           datasets: [
             {
-              label: "Plt Edits",
-              data: newBedData[ix],
+              label: ix,
+              data: newBedData.values,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
