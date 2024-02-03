@@ -208,37 +208,55 @@ const Dashboard = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="flex-col flex">
+                      <div className="flex-col flex mr-3">
                         <span className="text-gray-500 text-xs">
                           Leaking finishes on
                         </span>
-                        <span className="text-gray-700">
-                          {bed.date_of_leak_over.slice(-1)[0]?.value}
+                        <span className="text-gray-700 text-sm my-1">
+                          {
+                            // format (bed.date_of_leak_over.slice(-1)[0]?.value) to readable date
+                            new Date(
+                              bed.date_of_leak_over.slice(-1)[0]?.value
+                            ).toLocaleString()
+                          }
                         </span>
-                        {bed.date_of_leak_over.slice(-1)[0]?.value ? (
-                          //Calculating how many hours and minutes left for the leaking finishes
-                          <span className="text-gray-500 text-xs">
-                            {Math.floor(
-                              (new Date(
-                                bed.date_of_leak_over.slice(-1)[0]?.value
-                              ) -
-                                new Date()) /
-                                3600000
-                            )}{" "}
-                            hours and{" "}
-                            {Math.floor(
-                              ((new Date(
-                                bed.date_of_leak_over.slice(-1)[0]?.value
-                              ) -
-                                new Date()) /
-                                60000) %
-                                60
-                            )}{" "}
-                            minutes left
-                          </span>
-                        ) : (
-                          <> </>
-                        )}
+                        {
+                          //if the leaking is not over
+                          bed.date_of_leak_over.slice(-1)[0]?.value &&
+                          new Date(bed.date_of_leak_over.slice(-1)[0]?.value) >
+                            new Date() ? (
+                            <>
+                              {bed.date_of_leak_over.slice(-1)[0]?.value ? (
+                                //Calculating how many hours and minutes left for the leaking finishes
+                                <span className="text-gray-500 text-xs">
+                                  {Math.floor(
+                                    (new Date(
+                                      bed.date_of_leak_over.slice(-1)[0]?.value
+                                    ) -
+                                      new Date()) /
+                                      3600000
+                                  )}{" "}
+                                  hours and{" "}
+                                  {Math.floor(
+                                    ((new Date(
+                                      bed.date_of_leak_over.slice(-1)[0]?.value
+                                    ) -
+                                      new Date()) /
+                                      60000) %
+                                      60
+                                  )}{" "}
+                                  minutes left
+                                </span>
+                              ) : (
+                                <> </>
+                              )}{" "}
+                            </>
+                          ) : (
+                            <Chip variant="dot" color="success" size="sm">
+                              Leaking over
+                            </Chip>
+                          )
+                        }
                       </div>
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">VOTS</span>
@@ -247,6 +265,13 @@ const Dashboard = () => {
                             {bed.vots.slice(-1)[0]?.value}%
                           </span>
                         )}
+                        <span
+                          className="text-gray-500 text-xs flex hover:cursor-pointer"
+                          name="vots"
+                          onClick={(e) => handleIx(e, bed._id)}
+                        >
+                          +
+                        </span>
                       </div>
                     </div>
                     <div className="flex flex-col gap-5 justify-between">
