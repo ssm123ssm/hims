@@ -54,12 +54,12 @@ const Admission_card = ({ props: data }) => {
 
     setForm((pr) => ({
       ...pr,
-      [name]: [
-        {
-          value: value,
-          timestamp: Date.now(),
-        },
-      ],
+      [name]:
+        pr[name].length > 0
+          ? pr[name].map((item, index) =>
+              index === 0 ? { value, timestamp: Date.now() } : item
+            )
+          : [{ value, timestamp: Date.now() }],
     }));
 
     console.log(form);

@@ -43,7 +43,6 @@ const Admission_card = () => {
         .filter((key) => !validations[key])
         .join(", ") + "  not valid";
 
-    //add a red border to the input fields that are not valid
     const inputs = document.querySelectorAll("input");
     inputs.forEach((input) => {
       console.log(validations[input.name]);
