@@ -123,7 +123,7 @@ const Admission_card = ({ props: data }) => {
                   name="first_name"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.first_name[0].value}
+                  defaultValue={data?.first_name[0]?.value}
                 />
               </div>
               <Input
@@ -132,7 +132,7 @@ const Admission_card = ({ props: data }) => {
                 name="age"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.age[0].value}
+                defaultValue={data?.age[0]?.value}
               />
               <Input
                 type="text"
@@ -140,7 +140,7 @@ const Admission_card = ({ props: data }) => {
                 name="bht_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bht_number[0].value}
+                defaultValue={data?.bht_number[0]?.value}
               />
               <Input
                 type="text"
@@ -148,7 +148,7 @@ const Admission_card = ({ props: data }) => {
                 name="bed_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bed_number[0].value}
+                defaultValue={data?.bed_number[0]?.value}
               />
 
               <Input
@@ -157,7 +157,7 @@ const Admission_card = ({ props: data }) => {
                 name="date_of_fever"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.date_of_fever[0].value}
+                defaultValue={data?.date_of_fever[0]?.value}
               />
 
               <Input
@@ -167,7 +167,7 @@ const Admission_card = ({ props: data }) => {
                 onChange={handleChange}
                 size="sm"
                 labelPlacement="outside-left"
-                defaultValue={data?.date_of_leak_over[0].value}
+                defaultValue={data?.date_of_leak_over[0]?.value}
               />
 
               <div className="flex gap-5 justify-evenly flex-col">
@@ -176,7 +176,7 @@ const Admission_card = ({ props: data }) => {
                   name="ns1_status"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.ns1_status[0].value}
+                  defaultValue={data?.ns1_status[0]?.value}
                 >
                   <Radio value="Negative">Negative</Radio>
                   <Radio value="Positive">Positive</Radio>
@@ -188,7 +188,7 @@ const Admission_card = ({ props: data }) => {
                   name="dexamethasone"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.dexamethasone[0].value}
+                  defaultValue={data?.dexamethasone[0]?.value}
                   orientation="horizontal"
                 >
                   <Radio value="Yes">Yes</Radio>
@@ -205,7 +205,7 @@ const Admission_card = ({ props: data }) => {
                     handleChange(e);
                   }}
                   size="sm"
-                  defaultValue={data?.plt[0].value}
+                  defaultValue={data?.plt[0]?.value}
                 />
                 <Input
                   type="text"
@@ -213,7 +213,7 @@ const Admission_card = ({ props: data }) => {
                   name="crp"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.crp[0].value}
+                  defaultValue={data?.crp[0]?.value}
                 />
                 <Input
                   type="text"
@@ -221,7 +221,7 @@ const Admission_card = ({ props: data }) => {
                   name="scr"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.scr[0].value}
+                  defaultValue={data?.scr[0]?.value}
                 />
 
                 <Input
@@ -230,7 +230,7 @@ const Admission_card = ({ props: data }) => {
                   name="wbc"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.wbc[0].value}
+                  defaultValue={data?.wbc[0]?.value}
                 />
 
                 <Input
@@ -239,7 +239,7 @@ const Admission_card = ({ props: data }) => {
                   name="sgot"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.sgot[0].value}
+                  defaultValue={data?.sgot[0]?.value}
                 />
 
                 <Input
@@ -248,7 +248,7 @@ const Admission_card = ({ props: data }) => {
                   name="sgpt"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.sgpt[0].value}
+                  defaultValue={data?.sgpt[0]?.value}
                 />
 
                 <Input
@@ -257,7 +257,7 @@ const Admission_card = ({ props: data }) => {
                   name="inr"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.inr[0].value}
+                  defaultValue={data?.inr[0]?.value}
                 />
 
                 <Input
@@ -266,7 +266,7 @@ const Admission_card = ({ props: data }) => {
                   name="pcv"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.pcv[0].value}
+                  defaultValue={data?.pcv[0]?.value}
                 />
                 <Input
                   type="text"
@@ -274,7 +274,7 @@ const Admission_card = ({ props: data }) => {
                   name="hb"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.hb[0].value}
+                  defaultValue={data?.hb[0]?.value}
                 />
               </div>
 
@@ -285,7 +285,7 @@ const Admission_card = ({ props: data }) => {
                   name="vots"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.vots[0].value}
+                  defaultValue={data?.vots[0]?.value}
                 />
                 <Input
                   type="text"
@@ -293,7 +293,7 @@ const Admission_card = ({ props: data }) => {
                   name="ultrasound_findings"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.ultrasound_findings[0].value}
+                  defaultValue={data?.ultrasound_findings[0]?.value}
                 />
               </div>
             </CardBody>

@@ -24,8 +24,8 @@ import React from "react";
 const Admission_card = () => {
   const [form, setForm] = useState({
     id: ["000"],
-    ns1_status: ["Negative"],
-    dexamethasone: ["No"],
+    ns1_status: [{ value: "Negative", timestamp: Date.now() }],
+    dexamethasone: [{ value: "No", timestamp: Date.now() }],
     status: ["active"],
   });
   const [submiting, setSubmiting] = useState(false);
