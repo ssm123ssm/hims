@@ -20,6 +20,8 @@ import {
 } from "@nextui-org/react";
 
 import React from "react";
+import { set } from "mongoose";
+import { isValid, isValidForm } from "@/app/utils/validate";
 
 const Admission_card = () => {
   const [form, setForm] = useState({
@@ -30,28 +32,67 @@ const Admission_card = () => {
   });
   const [submiting, setSubmiting] = useState(false);
   const router = useRouter();
+  const [validations, setValidations] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setForm((pr) => ({ ...pr, ["id"]: ["123"] }));
-    console.log(form);
-    const res = await fetch("/api/admission", {
-      method: "POST",
-      body: JSON.stringify({ form }),
-      "Content-Type": "application/json",
+    const isValid = Object.values(validations).every((v) => v);
+    const validationMessages = //create a message to user pointing out which fields are not valid
+      Object.keys(validations)
+        .filter((key) => !validations[key])
+        .join(", ") + "  not valid";
+
+    //add a red border to the input fields that are not valid
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => {
+      console.log(validations[input.name]);
+      if (
+        // check if validations[input.name] is true or undefined
+        validations[input.name] === undefined ||
+        validations[input.name]
+      ) {
+      } else {
+        //add the input field font color to red
+        input.style.color = "red";
+
+        //change font to bold
+        input.style.fontWeight = "bold";
+      }
     });
 
-    if (res.ok) {
-      setSubmiting(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 0);
+    const isValidAdmissionForm = isValidForm(form, [
+      "first_name",
+      "bht_number",
+    ]);
+    if (!isValid) {
+      alert(validationMessages);
+    } else if (!isValidAdmissionForm) {
+      alert("Name and the BHT number are required fields.");
+    } else {
+      const res = await fetch("/api/admission", {
+        method: "POST",
+        body: JSON.stringify({ form }),
+        "Content-Type": "application/json",
+      });
+
+      if (res.ok) {
+        setSubmiting(true);
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 0);
+      }
     }
   };
 
   const handleChange = (e, edit) => {
     const value = e.target.value;
     const name = e.target.name;
+    const validation = setValidations((pr) => {
+      const newValidation = { ...pr, [name]: isValid(value, name) };
+      return newValidation;
+    });
+
     if (edit) {
       console.log("edit:", edit);
       setForm((pr) => ({ ...pr, [name]: value, [edit]: [+value] }));
@@ -69,8 +110,6 @@ const Admission_card = () => {
         })
       );
     }
-
-    console.log(form);
   };
 
   useEffect(() => {
