@@ -35,7 +35,6 @@ const Nav = () => {
               content: "drop-shadow shadow-black text-white",
             }}
           >
-            <FontAwesomeIcon icon={faMosquito} className="mr-2" size="xl" />
             Alpha version 1.0
           </Chip>
         </div>

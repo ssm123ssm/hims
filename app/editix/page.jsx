@@ -49,7 +49,11 @@ const Page = () => {
         setUserData(data[0]);
         //data[0][ix] is an array of objects with {value: value, timestamp: timestamp} format. Create two arrays from this data, one for the values and one for the timestamps.
         const values = data[0][ix].map((item) => item.value);
-        const timestamps = data[0][ix].map((item) => item.timestamp);
+        const timestamps = data[0][ix].map(
+          (
+            item //map over the timestamps and convert them to a human readable format
+          ) => new Date(item.timestamp).toLocaleString()
+        );
 
         setBedData({ values: values, timestamps: timestamps });
         setLineData({
@@ -75,11 +79,14 @@ const Page = () => {
 
   const handleProcess = async () => {
     setSubmitting(true);
+    const currentDate = new Date();
+    const ISO = currentDate.toISOString();
     const newBedData = {
       values: [...bedData.values, newIx],
-      timestamps: [...bedData.timestamps, Date.now()],
+      timestamps: [...bedData.timestamps, new Date(ISO).toLocaleString()],
       _id: id,
     };
+
     const newUserData = {
       ...userData,
       [ix]: [...userData[ix], { value: newIx, timestamp: Date.now() }],
@@ -99,7 +106,8 @@ const Page = () => {
 
       if (res.ok) {
         setLineData({
-          labels: newBedData.timestamps,
+          //iterate over the timestamps and convert them to a human readable format,
+          labels: newBedData.timestamps.map((timestamp) => timestamp),
           datasets: [
             {
               label: ix,
