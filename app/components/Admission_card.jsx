@@ -56,7 +56,18 @@ const Admission_card = () => {
       console.log("edit:", edit);
       setForm((pr) => ({ ...pr, [name]: value, [edit]: [+value] }));
     } else {
-      setForm((pr) => ({ ...pr, [name]: [value] }));
+      setForm((pr) =>
+        //check if pr[name] is empty array or an array of objects
+        ({
+          ...pr,
+          [name]: [
+            {
+              value: value,
+              timestamp: Date.now(),
+            },
+          ],
+        })
+      );
     }
 
     console.log(form);
