@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
         <div>
           <Nav />
 
-          <div className="grid grid-cols-8">
-            <div className="col-span-2">
+          <div className="grid grid-cols-6 lg:grid-cols-8">
+            <div className="hidden lg:block lg:col-span-2">
               <Sidebar />
             </div>
-            <div className="col-span-6 justify-center ml-10 overflow-auto flex h-screen">
+            <div className="col-span-6 justify-center lg:ml-10 overflow-auto flex h-screen">
               <Suspense fallback={<Loading />} className="justify-around">
                 {children}
               </Suspense>

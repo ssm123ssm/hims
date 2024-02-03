@@ -95,20 +95,16 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex ml-10">
+    <div className="flex my-2 mx-3 lg:ml-10 w-full justify-center">
       <Scroller />
       {bedsLoaded ? (
-        <div className="flex flex-col gap-5 justify-start items-start ">
+        <div className="flex flex-col lg:gap-5 justify-start items-start w-full sm:w-[90%]">
           <Search props={{ beds, handleSearchChange }} />
           {beds
             .filter((bed) => bed.visible === true)
             .map((bed) => (
-              <div className="flex w-[800px] justify-center" key={bed._id}>
-                <Card
-                  key={bed._id}
-                  className="flex w-[1000px] my-5 "
-                  shadow="sm"
-                >
+              <div className="flex w-full justify-center" key={bed._id}>
+                <Card key={bed._id} className="flex w-full my-5 " shadow="sm">
                   <div className="flex justify-between items-center mr-3 my-2">
                     <div className="flex">
                       <CardHeader>
@@ -126,7 +122,7 @@ const Dashboard = () => {
                   </div>
 
                   <Divider />
-                  <CardBody className="grid grid-cols-5">
+                  <CardBody className="grid grid-cols-3 lg:grid-cols-5">
                     <div className="flex flex-col gap-5 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>

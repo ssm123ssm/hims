@@ -24,7 +24,7 @@ import { faMosquito } from "@fortawesome/free-solid-svg-icons";
 const Nav = () => {
   return (
     <Navbar
-      className="backdrop-opacity-20 backdrop-blur-3xl mb-10"
+      className="backdrop-opacity-20 backdrop-blur-3xl lg:mb-10"
       isBlurred={true}
     >
       <NavbarBrand>

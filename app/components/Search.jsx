@@ -5,7 +5,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Search = ({ props: { beds, handleSearchChange } }) => {
   return (
-    <div className="flex flex-row justify-end p-4 border-slate-700 mt-4 h-15">
+    <div className="flex flex-row justify-end p-4 border-slate-700 lg:mt-4 h-15">
       <Autocomplete
         label="Search patients"
         className="max-w-xs text-slate-500"

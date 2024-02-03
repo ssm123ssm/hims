@@ -6,7 +6,7 @@ const Loading = () => {
   return (
     <div>
       <Scroller />
-      <div className="space-y-5 p-4 w-[600px]">
+      <div className="space-y-5 p-4 w-[300px] sm:w-[600px]">
         <div className="space-y-3">
           <Skeleton style={{ borderRadius: "0.25rem" }} className="w-3/5">
             <div className="h-3 w-3/5 bg-default-200"></div>
