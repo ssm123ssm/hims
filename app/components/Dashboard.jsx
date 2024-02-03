@@ -95,7 +95,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex my-2 mx-3 lg:ml-10 w-full justify-center">
+    <div className="flex my-2 mx-3 lg:ml-10 w-full justify-center md:justify-normal">
       <Scroller />
       {bedsLoaded ? (
         <div className="flex flex-col lg:gap-5 justify-start items-start w-full sm:w-[90%]">
@@ -122,7 +122,7 @@ const Dashboard = () => {
                   </div>
 
                   <Divider />
-                  <CardBody className="grid grid-cols-3 lg:grid-cols-5">
+                  <CardBody className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
                     <div className="flex flex-col gap-5 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>
