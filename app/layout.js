@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <div>
           <Nav />
 
-          <div className="grid grid-cols-6 lg:grid-cols-8">
+          <div className="grid grid-cols-6 lg:grid-cols-8 max-h-lvh overflow-hidden">
             <div className="hidden lg:block lg:col-span-2">
               <Sidebar />
             </div>
