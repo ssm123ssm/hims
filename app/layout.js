@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
             <div className="hidden lg:block lg:col-span-2">
               <Sidebar />
             </div>
-            <div className="col-span-6 justify-center lg:ml-10 overflow-auto flex h-screen">
+            <div className="col-span-6 justify-center lg:ml-10 overflow-auto flex">
               <Suspense fallback={<Loading />} className="justify-around">
                 {children}
               </Suspense>

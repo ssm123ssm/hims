@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 
 const dashboard = () => {
   return (
-    <div className="flex h-screen overflow-auto w-full justify-around">
+    <div className="flex h-screen overflow-auto w-full justify-around pb-[100px]">
       <Dashboard />
     </div>
   );
