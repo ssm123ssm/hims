@@ -116,7 +116,7 @@ const Admission_card = () => {
   }, []);
 
   return (
-    <Card className=" p-4 my-4 flex justify-start w-[800px]">
+    <Card className=" p-4 my-4 flex justify-start max-w-[800px] mx-4 overflow-auto w-4/5 max-h-screen">
       <CardHeader className="font-weight-300 text-gray-500 flex justify-center mb-5">
         Admission Card
       </CardHeader>
