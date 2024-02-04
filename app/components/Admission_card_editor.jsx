@@ -100,7 +100,7 @@ const Admission_card = ({ props: data }) => {
   };
 
   return (
-    <Card className=" p-4 my-4 justify-center mx-auto w-[800px]">
+    <Card className=" p-4 my-4 flex justify-start max-w-[800px] mx-4 overflow-auto w-4/5 max-h-screen">
       <Warnin_modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
