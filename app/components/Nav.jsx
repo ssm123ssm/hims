@@ -19,7 +19,11 @@ import {
   Chip,
 } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMosquito } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHospitalUser,
+  faHouse,
+  faTableColumns,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useReducer(
@@ -40,6 +44,7 @@ const Nav = () => {
       isBlurred={true}
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      position="sticky"
     >
       <NavbarBrand className="hidden sm:flex">
         <div className="font-bold text-inherit">
@@ -116,7 +121,7 @@ const Nav = () => {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-      <NavbarMenu className="h-1/2 flex flex-col">
+      <NavbarMenu className="flex flex-col mt-10 w-1/2 gap-8 h-[80px]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem
             key={`${item}-${index}`}
@@ -126,11 +131,23 @@ const Nav = () => {
             }}
           >
             <Link
-              className="w-full hover:cursor-pointer text-purple-500 font-medium"
+              className="w-full hover:cursor-pointer text-purple-500 font-medium flex flex-row gap-5 items-center"
               href={item.href}
               size="lg"
             >
-              {item.display}
+              {item.display == "Home" && (
+                <FontAwesomeIcon
+                  icon={faHouse}
+                  className="flex  justify-center"
+                />
+              )}
+              {item.display == "Dashboard" && (
+                <FontAwesomeIcon icon={faTableColumns} />
+              )}
+              {item.display == "Admit" && (
+                <FontAwesomeIcon icon={faHospitalUser} />
+              )}
+              <div className="">{item.display}</div>
             </Link>
           </NavbarMenuItem>
         ))}
