@@ -22,16 +22,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMosquito } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useReducer(
+    (current) => !current,
+    false
+  );
+  const menuItems = [
+    { display: "Home", href: "/" },
+    { display: "Dashboard", href: "/dashboard" },
+    { display: "Admit", href: "/admit" },
+  ];
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   return (
     <Navbar
       className="backdrop-opacity-20 backdrop-blur-3xl lg:mb-10"
       isBlurred={true}
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
     >
-      <NavbarBrand>
+      <NavbarBrand className="hidden sm:flex">
         <div className="font-bold text-inherit">
           <Chip
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 p-2 text-xs",
+              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 p-2 text-xs ",
               content: "drop-shadow shadow-black text-white",
             }}
           >
@@ -39,6 +53,10 @@ const Nav = () => {
           </Chip>
         </div>
       </NavbarBrand>
+      <NavbarMenuToggle
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className="sm:hidden"
+      />
       <NavbarContent className="hidden sm:flex gap-[80px] ml-10 justify-evenly">
         <NavbarItem>
           <Link
@@ -98,6 +116,25 @@ const Nav = () => {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
+      <NavbarMenu className="h-1/2 flex flex-col">
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem
+            key={`${item}-${index}`}
+            onClick={() => {
+              console.log("pressed");
+              setIsMenuOpen();
+            }}
+          >
+            <Link
+              className="w-full hover:cursor-pointer text-purple-500 font-medium"
+              href={item.href}
+              size="lg"
+            >
+              {item.display}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
 };

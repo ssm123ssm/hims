@@ -97,6 +97,7 @@ const Dashboard = () => {
   return (
     <div className="flex my-2 mx-3 lg:ml-10 w-full justify-center md:justify-normal">
       <Scroller />
+
       {bedsLoaded ? (
         <div className="flex flex-col lg:gap-5 justify-start items-start w-full sm:w-[90%]">
           <Search props={{ beds, handleSearchChange }} />
