@@ -123,7 +123,7 @@ const Dashboard = () => {
 
                   <Divider />
                   <CardBody className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5">
-                    <div className="flex flex-col gap-5 justify-between">
+                    <div className="flex flex-col gap-3 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>
                         <div className="flex flex-col">
@@ -177,7 +177,7 @@ const Dashboard = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-5 justify-between">
+                    <div className="flex flex-col gap-3 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>
                         <div className="flex flex-col">
@@ -255,7 +255,12 @@ const Dashboard = () => {
                                   )}{" "}
                                 </>
                               ) : (
-                                <Chip variant="dot" color="success" size="sm">
+                                <Chip
+                                  variant="dot"
+                                  color="success"
+                                  size="sm"
+                                  className="hidden min-[370px]:flex"
+                                >
                                   Leaking over
                                 </Chip>
                               )
@@ -279,7 +284,7 @@ const Dashboard = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-5 justify-between">
+                    <div className="flex flex-col gap-3 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>
                         <div className="flex flex-col">
@@ -353,7 +358,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-5 justify-between">
+                    <div className="flex flex-col gap-3 justify-between">
                       <div className="flex justify-start">
                         <div className="flex fle-col text-slate-500"></div>
                         <div className="flex flex-col">
@@ -425,7 +430,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-5">
+                    <div className="flex flex-col gap-3">
                       <div className="flex-col flex">
                         <span className="text-gray-500 text-xs">PCV</span>
                         <div className="flex flex-r">
