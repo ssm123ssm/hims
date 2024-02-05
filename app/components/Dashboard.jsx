@@ -95,7 +95,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex my-2 mx-3 lg:ml-10 w-full justify-center md:justify-normal h-full overflow-auto">
+    <div className="mb-[80px] flex my-2 mx-3 lg:ml-10 w-full justify-center md:justify-normal h-full overflow-auto">
       <Scroller />
 
       {bedsLoaded ? (
