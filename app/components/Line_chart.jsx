@@ -41,11 +41,7 @@ const Line_chart = ({ data }) => {
       },
     },
   };
-  return (
-    <div className="w-[600px]">
-      <Line options={options} data={data} />
-    </div>
-  );
+  return <Line options={options} data={data} />;
 };
 
 export default Line_chart;

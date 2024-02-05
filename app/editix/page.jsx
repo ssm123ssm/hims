@@ -131,15 +131,16 @@ const Page = () => {
   };
 
   return (
-    <div className="w-1/2">
+    <div className="w-full flex justify-center items-center flex-col">
       <Scroller />
 
       {!lineReady ? (
         <Loading />
       ) : (
-        <>
-          <h2>{ix}</h2>
-          <Line_chart data={lineData} />
+        <div className="flex flex-col justify-center w-full p-8">
+          <h2 className="">{ix}</h2>
+          <Line_chart data={lineData} className="max-w-10" />
+
           <Input
             className="my-5"
             name="newix"
@@ -153,7 +154,7 @@ const Page = () => {
           >
             {submitting ? "Please wait..." : "Process"}
           </Button>
-        </>
+        </div>
       )}
     </div>
   );

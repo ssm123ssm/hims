@@ -121,7 +121,7 @@ const Nav = () => {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-      <NavbarMenu className="flex flex-col mt-10 w-1/2 gap-8 h-[80px]">
+      <NavbarMenu className="flex flex-col pt-10 w-1/2 gap-8 h-[80px]">
         {menuItems.map((item, index) => (
           <NavbarMenuItem
             key={`${item}-${index}`}
