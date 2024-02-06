@@ -131,13 +131,13 @@ const Page = () => {
   };
 
   return (
-    <div className="w-full flex justify-center items-center flex-col overflow-auto h-dvh">
+    <div className="w-full flex justify-start items-start flex-col overflow-auto h-dvh">
       <Scroller />
 
       {!lineReady ? (
         <Loading />
       ) : (
-        <div className="flex flex-col justify-center w-full p-8 h-dvh overflow-auto">
+        <div className="flex flex-col justify-start w-full p-8 h-dvh overflow-auto">
           <h2 className="">{ix}</h2>
           <Line_chart data={lineData} className="max-w-10" />
 
@@ -150,7 +150,7 @@ const Page = () => {
           <Button
             onClick={handleProcess}
             disabled={submitting}
-            className="w-[300px] p-[30px]"
+            className="w-[100px] p-[30px] h-[30px]"
           >
             {submitting ? "Please wait..." : "Process"}
           </Button>
