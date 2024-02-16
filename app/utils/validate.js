@@ -26,9 +26,6 @@ export const isValid = (value, name) => {
   } else if (name === "bht_number" || name === "ultrasound_findings") {
     // Allow empty strings for these fields
     return true;
-  } else if (name === "date_of_leak_over") {
-    // Check if the value is a date
-    return Number(value) > 0;
   } else {
     // Default to true for unknown fields
     return true;

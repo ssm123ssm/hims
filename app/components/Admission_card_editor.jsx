@@ -303,7 +303,7 @@ const Admission_card = ({ props: data }) => {
 
         <div
           className="
-              flex flex-row justify-around flex-wrap gap-3"
+              flex flex-row justify-around flex-wrap gap-3 mb-10"
         >
           {submiting ? (
             <Button className="text-white bg-purple-400" isLoading isDisabled>
