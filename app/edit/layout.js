@@ -5,9 +5,7 @@ import Nav from "@/app/components/Nav";
 import Sidebar from "@/app/components/Sidebar";
 import Loading from "@/app/components/Loading";
 import { Suspense } from "react";
-import { headers } from "next/headers";
 
-const heads = headers();
 const inter = Inter({ subsets: ["latin"] });
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -17,11 +15,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  //get current url
-  const heads = headers();
-
-  const pathname = heads.get("next-url");
-  console.log(heads.get("x-forwarded-proto"));
   return (
     <html lang="en">
       <body className="light">
