@@ -7,7 +7,6 @@ const Login = () => {
       <div className="col-span-1 md:col-span-3">
         <Login_component />
       </div>
-      \
     </div>
   );
 };
