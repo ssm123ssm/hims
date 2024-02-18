@@ -26,7 +26,7 @@ const Login_component = () => {
         </div>
       </div>
 
-      <Card className="w-3/4 max-w-[400px]">
+      <Card className="w-[90%] max-w-[400px]">
         <CardBody>
           <div className="flex gap-4 flex-col items-center">
             <Input type="email" label="Email" placeholder="Enter your email" />
@@ -42,18 +42,18 @@ const Login_component = () => {
       <Button
         color="primary"
         size="md"
-        className="w-3/4 max-w-[400px]"
+        className="w-[90%] max-w-[400px]"
         onPress={() => {
           router.push("/");
         }}
       >
         Log in
       </Button>
-      <Divider orientation="horizontal" className="w-3/4 max-w-[400px]" />
+      <Divider orientation="horizontal" className="w-[90%] max-w-[400px]" />
       <Button
         color="primary"
         variant="bordered"
-        className="w-3/4 max-w-[400px]"
+        className="w-[90%] max-w-[400px]"
       >
         SSO
       </Button>
