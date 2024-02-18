@@ -21,7 +21,7 @@ const Login_component = () => {
   console.log(session);
 
   return (
-    <div className="flex w-full justify-center p-4 flex-col items-center gap-4 max-h-dvh min-h-[500px] mt-10">
+    <div className="flex w-full justify-center p-4 flex-col items-center gap-4 max-h-dvh min-h-[500px]">
       <div className="flex flex-col items-center mb-5">
         <div className="text-xl font-medium">Welcome Back</div>
         <div className="tex-small text-default-500">
