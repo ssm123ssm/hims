@@ -5,7 +5,7 @@ import Admission_card from "../components/Admission_card";
 const page = () => {
   return (
     <>
-      <div className="">
+      <div className="h-3/4 overflow-auto w-full justify-center flex">
         <Admission_card />{" "}
       </div>
     </>

@@ -20,46 +20,95 @@ import {
 } from "@nextui-org/react";
 
 import React from "react";
+import { set } from "mongoose";
+import { isValid, isValidForm } from "@/app/utils/validate";
 
 const Admission_card = () => {
   const [form, setForm] = useState({
     id: ["000"],
-    ns1_status: ["Negative"],
-    dexamethasone: ["No"],
+    ns1_status: [{ value: "Negative", timestamp: Date.now() }],
+    dexamethasone: [{ value: "No", timestamp: Date.now() }],
     status: ["active"],
   });
   const [submiting, setSubmiting] = useState(false);
   const router = useRouter();
+  const [validations, setValidations] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setForm((pr) => ({ ...pr, ["id"]: ["123"] }));
-    console.log(form);
-    const res = await fetch("/api/admission", {
-      method: "POST",
-      body: JSON.stringify({ form }),
-      "Content-Type": "application/json",
+    const isValid = Object.values(validations).every((v) => v);
+    const validationMessages = //create a message to user pointing out which fields are not valid
+      Object.keys(validations)
+        .filter((key) => !validations[key])
+        .join(", ") + "  not valid";
+
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => {
+      console.log(validations[input.name]);
+      if (
+        // check if validations[input.name] is true or undefined
+        validations[input.name] === undefined ||
+        validations[input.name]
+      ) {
+      } else {
+        //add the input field font color to red
+        input.style.color = "red";
+
+        //change font to bold
+        input.style.fontWeight = "bold";
+      }
     });
 
-    if (res.ok) {
-      setSubmiting(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 0);
+    const isValidAdmissionForm = isValidForm(form, [
+      "first_name",
+      "bht_number",
+    ]);
+    if (!isValid) {
+      alert(validationMessages);
+    } else if (!isValidAdmissionForm) {
+      alert("Name and the BHT number are required fields.");
+    } else {
+      const res = await fetch("/api/admission", {
+        method: "POST",
+        body: JSON.stringify({ form }),
+        "Content-Type": "application/json",
+      });
+
+      if (res.ok) {
+        setSubmiting(true);
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 0);
+      }
     }
   };
 
   const handleChange = (e, edit) => {
     const value = e.target.value;
     const name = e.target.name;
+    const validation = setValidations((pr) => {
+      const newValidation = { ...pr, [name]: isValid(value, name) };
+      return newValidation;
+    });
+
     if (edit) {
       console.log("edit:", edit);
       setForm((pr) => ({ ...pr, [name]: value, [edit]: [+value] }));
     } else {
-      setForm((pr) => ({ ...pr, [name]: [value] }));
+      setForm((pr) =>
+        //check if pr[name] is empty array or an array of objects
+        ({
+          ...pr,
+          [name]: [
+            {
+              value: value,
+              timestamp: Date.now(),
+            },
+          ],
+        })
+      );
     }
-
-    console.log(form);
   };
 
   useEffect(() => {
@@ -67,7 +116,7 @@ const Admission_card = () => {
   }, []);
 
   return (
-    <Card className=" p-4 my-4 flex justify-start w-[800px]">
+    <Card className=" p-4 my-4 flex justify-start max-w-[800px] mx-4 overflow-auto w-4/5 max-h-screen">
       <CardHeader className="font-weight-300 text-gray-500 flex justify-center mb-5">
         Admission Card
       </CardHeader>

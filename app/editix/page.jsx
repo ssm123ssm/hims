@@ -15,6 +15,7 @@ const Page = () => {
   const id = useSearchParams().get("id");
   const [bedLoaded, setBedLoaded] = useState(false);
   const [bedData, setBedData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [lineData, setLineData] = useState({
     labels: [],
     datasets: [
@@ -45,13 +46,22 @@ const Page = () => {
 
         const data = await response.json();
         console.log("data:", data[0][ix]);
-        setBedData(data[0]);
+        setUserData(data[0]);
+        //data[0][ix] is an array of objects with {value: value, timestamp: timestamp} format. Create two arrays from this data, one for the values and one for the timestamps.
+        const values = data[0][ix].map((item) => item.value);
+        const timestamps = data[0][ix].map(
+          (
+            item //map over the timestamps and convert them to a human readable format
+          ) => new Date(item.timestamp).toLocaleString()
+        );
+
+        setBedData({ values: values, timestamps: timestamps });
         setLineData({
-          labels: data[0][ix].map((item, index) => index),
+          labels: timestamps,
           datasets: [
             {
               label: ix,
-              data: data[0][ix],
+              data: values,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
@@ -69,28 +79,39 @@ const Page = () => {
 
   const handleProcess = async () => {
     setSubmitting(true);
+    const currentDate = new Date();
+    const ISO = currentDate.toISOString();
     const newBedData = {
-      ...bedData,
-      [ix]: [...bedData[ix], parseFloat(newIx)],
+      values: [...bedData.values, newIx],
+      timestamps: [...bedData.timestamps, new Date(ISO).toLocaleString()],
+      _id: id,
     };
 
+    const newUserData = {
+      ...userData,
+      [ix]: [...userData[ix], { value: newIx, timestamp: Date.now() }],
+    };
+
+    setBedData((pr) => newBedData);
+    setUserData((pr) => newUserData);
+    console.log("userData:", userData);
     try {
       const res = await fetch("/api/edit", {
         method: "POST",
-        body: JSON.stringify({ form: newBedData }),
+        body: JSON.stringify({ form: newUserData }),
         headers: {
           "Content-Type": "application/json",
         },
       });
 
       if (res.ok) {
-        setBedData(newBedData);
         setLineData({
-          labels: newBedData[ix].map((item, index) => index),
+          //iterate over the timestamps and convert them to a human readable format,
+          labels: newBedData.timestamps.map((timestamp) => timestamp),
           datasets: [
             {
-              label: "Plt Edits",
-              data: newBedData[ix],
+              label: ix,
+              data: newBedData.values,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
@@ -110,15 +131,16 @@ const Page = () => {
   };
 
   return (
-    <div className="w-1/2">
+    <div className="w-full flex justify-start items-start flex-col overflow-auto h-dvh">
       <Scroller />
 
       {!lineReady ? (
         <Loading />
       ) : (
-        <>
-          <h2>{ix}</h2>
-          <Line_chart data={lineData} />
+        <div className="flex flex-col justify-start w-full p-8 h-dvh overflow-auto">
+          <h2 className="">{ix}</h2>
+          <Line_chart data={lineData} className="max-w-10" />
+
           <Input
             className="my-5"
             name="newix"
@@ -128,11 +150,11 @@ const Page = () => {
           <Button
             onClick={handleProcess}
             disabled={submitting}
-            className="w-[300px]"
+            className="w-[100px] p-[30px] h-[30px]"
           >
             {submitting ? "Please wait..." : "Process"}
           </Button>
-        </>
+        </div>
       )}
     </div>
   );

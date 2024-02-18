@@ -55,9 +55,11 @@ const Admission_card = ({ props: data }) => {
     setForm((pr) => ({
       ...pr,
       [name]:
-        pr[name].length === 0
-          ? [value] // If the array is empty, create a new array with the value
-          : pr[name].map((item, index) => (index === 0 ? value : item)),
+        pr[name].length > 0
+          ? pr[name].map((item, index) =>
+              index === 0 ? { value, timestamp: Date.now() } : item
+            )
+          : [{ value, timestamp: Date.now() }],
     }));
 
     console.log(form);
@@ -98,7 +100,7 @@ const Admission_card = ({ props: data }) => {
   };
 
   return (
-    <Card className=" p-4 my-4 justify-center mx-auto w-[800px]">
+    <Card className=" p-4 my-4 flex justify-start max-w-[800px] mx-4 overflow-auto w-4/5 max-h-screen">
       <Warnin_modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -121,7 +123,7 @@ const Admission_card = ({ props: data }) => {
                   name="first_name"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.first_name[0]}
+                  defaultValue={data?.first_name[0]?.value}
                 />
               </div>
               <Input
@@ -130,7 +132,7 @@ const Admission_card = ({ props: data }) => {
                 name="age"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.age[0]}
+                defaultValue={data?.age[0]?.value}
               />
               <Input
                 type="text"
@@ -138,7 +140,7 @@ const Admission_card = ({ props: data }) => {
                 name="bht_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bht_number[0]}
+                defaultValue={data?.bht_number[0]?.value}
               />
               <Input
                 type="text"
@@ -146,7 +148,7 @@ const Admission_card = ({ props: data }) => {
                 name="bed_number"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.bed_number[0]}
+                defaultValue={data?.bed_number[0]?.value}
               />
 
               <Input
@@ -155,7 +157,7 @@ const Admission_card = ({ props: data }) => {
                 name="date_of_fever"
                 onChange={handleChange}
                 size="sm"
-                defaultValue={data?.date_of_fever[0]}
+                defaultValue={data?.date_of_fever[0]?.value}
               />
 
               <Input
@@ -165,7 +167,7 @@ const Admission_card = ({ props: data }) => {
                 onChange={handleChange}
                 size="sm"
                 labelPlacement="outside-left"
-                defaultValue={data?.date_of_leak_over[0]}
+                defaultValue={data?.date_of_leak_over[0]?.value}
               />
 
               <div className="flex gap-5 justify-evenly flex-col">
@@ -174,7 +176,7 @@ const Admission_card = ({ props: data }) => {
                   name="ns1_status"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.ns1_status[0]}
+                  defaultValue={data?.ns1_status[0]?.value}
                 >
                   <Radio value="Negative">Negative</Radio>
                   <Radio value="Positive">Positive</Radio>
@@ -186,7 +188,7 @@ const Admission_card = ({ props: data }) => {
                   name="dexamethasone"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.dexamethasone[0]}
+                  defaultValue={data?.dexamethasone[0]?.value}
                   orientation="horizontal"
                 >
                   <Radio value="Yes">Yes</Radio>
@@ -203,7 +205,7 @@ const Admission_card = ({ props: data }) => {
                     handleChange(e);
                   }}
                   size="sm"
-                  defaultValue={data?.plt[0]}
+                  defaultValue={data?.plt[0]?.value}
                 />
                 <Input
                   type="text"
@@ -211,7 +213,7 @@ const Admission_card = ({ props: data }) => {
                   name="crp"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.crp[0]}
+                  defaultValue={data?.crp[0]?.value}
                 />
                 <Input
                   type="text"
@@ -219,7 +221,7 @@ const Admission_card = ({ props: data }) => {
                   name="scr"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.scr[0]}
+                  defaultValue={data?.scr[0]?.value}
                 />
 
                 <Input
@@ -228,7 +230,7 @@ const Admission_card = ({ props: data }) => {
                   name="wbc"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.wbc[0]}
+                  defaultValue={data?.wbc[0]?.value}
                 />
 
                 <Input
@@ -237,7 +239,7 @@ const Admission_card = ({ props: data }) => {
                   name="sgot"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.sgot[0]}
+                  defaultValue={data?.sgot[0]?.value}
                 />
 
                 <Input
@@ -246,7 +248,7 @@ const Admission_card = ({ props: data }) => {
                   name="sgpt"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.sgpt[0]}
+                  defaultValue={data?.sgpt[0]?.value}
                 />
 
                 <Input
@@ -255,7 +257,7 @@ const Admission_card = ({ props: data }) => {
                   name="inr"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.inr[0]}
+                  defaultValue={data?.inr[0]?.value}
                 />
 
                 <Input
@@ -264,7 +266,7 @@ const Admission_card = ({ props: data }) => {
                   name="pcv"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.pcv[0]}
+                  defaultValue={data?.pcv[0]?.value}
                 />
                 <Input
                   type="text"
@@ -272,7 +274,7 @@ const Admission_card = ({ props: data }) => {
                   name="hb"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.hb[0]}
+                  defaultValue={data?.hb[0]?.value}
                 />
               </div>
 
@@ -283,7 +285,7 @@ const Admission_card = ({ props: data }) => {
                   name="vots"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.vots[0]}
+                  defaultValue={data?.vots[0]?.value}
                 />
                 <Input
                   type="text"
@@ -291,7 +293,7 @@ const Admission_card = ({ props: data }) => {
                   name="ultrasound_findings"
                   onChange={handleChange}
                   size="sm"
-                  defaultValue={data?.ultrasound_findings[0]}
+                  defaultValue={data?.ultrasound_findings[0]?.value}
                 />
               </div>
             </CardBody>
@@ -301,7 +303,7 @@ const Admission_card = ({ props: data }) => {
 
         <div
           className="
-              flex flex-row justify-around"
+              flex flex-row justify-around flex-wrap gap-3 mb-10"
         >
           {submiting ? (
             <Button className="text-white bg-purple-400" isLoading isDisabled>

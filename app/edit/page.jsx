@@ -41,10 +41,10 @@ const Page = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="h-3/4 overflow-auto w-full justify-center flex">
       <Scroller />
       {!bedLoaded ? (
-        <div className="space-y-5 p-4 w-[800px]">
+        <div className="h-[250px]">
           <Loading />
         </div>
       ) : (
