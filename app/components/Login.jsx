@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react";
 import React from "react";
 import {
   Card,
@@ -13,14 +13,15 @@ import {
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { data } from "autoprefixer";
 
 const Login_component = () => {
   const router = useRouter();
-  const { data: session } = useSession()
-
+  const { data: session } = useSession();
+  console.log(session);
 
   return (
-    <div className="flex w-full justify-center p-4 text-white flex-col items-center gap-4 max-h-dvh min-h-[500px] mt-10">
+    <div className="flex w-full justify-center p-4 flex-col items-center gap-4 max-h-dvh min-h-[500px] mt-10">
       <div className="flex flex-col items-center mb-5">
         <div className="text-xl font-medium">Welcome Back</div>
         <div className="tex-small text-default-500">
@@ -56,7 +57,9 @@ const Login_component = () => {
         color="primary"
         variant="bordered"
         className="w-[90%] max-w-[400px]"
-        onClick={() => {signIn()}}
+        onClick={() => {
+          signIn();
+        }}
       >
         SSO
       </Button>

@@ -24,10 +24,11 @@ import {
   faHouse,
   faTableColumns,
 } from "@fortawesome/free-solid-svg-icons";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Nav = (props) => {
   const { isVisible } = props.props;
-  console.log(isVisible);
+  const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = React.useReducer(
     (current) => !current,
     false
@@ -40,6 +41,7 @@ const Nav = (props) => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
   return (
     //return navbar only if isVisible is true
     <>
@@ -105,15 +107,15 @@ const Nav = (props) => {
                   as="button"
                   className="transition-transform"
                   color="secondary"
-                  name="Jason Hughes"
+                  name={session?.user?.name}
                   size="sm"
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                  src={session?.user?.image}
                 />
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">zoey@example.com</p>
+                  <p className="font-semibold">{session?.user?.email}</p>
                 </DropdownItem>
                 <DropdownItem key="settings">My Settings</DropdownItem>
                 <DropdownItem key="analytics">Analytics</DropdownItem>
@@ -122,7 +124,7 @@ const Nav = (props) => {
                 <DropdownItem key="help_and_feedback">
                   Help & Feedback
                 </DropdownItem>
-                <DropdownItem key="logout" color="danger">
+                <DropdownItem key="logout" color="danger" onPress={signOut}>
                   Log Out
                 </DropdownItem>
               </DropdownMenu>
