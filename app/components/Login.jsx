@@ -1,5 +1,5 @@
 "use client";
-
+import { useSession, signIn, signOut } from "next-auth/react"
 import React from "react";
 import {
   Card,
@@ -16,6 +16,8 @@ import { useRouter } from "next/navigation";
 
 const Login_component = () => {
   const router = useRouter();
+  const { data: session } = useSession()
+
 
   return (
     <div className="flex w-full justify-center p-4 text-white flex-col items-center gap-4 max-h-dvh min-h-[500px] mt-10">
@@ -54,6 +56,7 @@ const Login_component = () => {
         color="primary"
         variant="bordered"
         className="w-[90%] max-w-[400px]"
+        onClick={() => {signIn()}}
       >
         SSO
       </Button>

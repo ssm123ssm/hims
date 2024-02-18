@@ -2,6 +2,7 @@
 
 import Nav from "@/app/components/Nav";
 import { useRouter } from "next/navigation";
+import { SessionProvider } from "next-auth/react";
 
 export default function Home() {
   const router = useRouter();
@@ -12,8 +13,9 @@ export default function Home() {
   }, 1000);
 
   return (
-    <main className="flex w-full h-full justify-center mt-10">
-      <p>Welcome...</p>
-    </main>
+    <SessionProvider><main className="flex w-full h-full justify-center mt-10">
+    <p>Welcome...</p>
+  </main></SessionProvider>
+    
   );
 }
