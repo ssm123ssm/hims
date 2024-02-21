@@ -74,7 +74,7 @@ const Nav = (props) => {
               <Link
                 color="foreground"
                 href="/"
-                className="font-bold text-purple-500"
+                className="font-bold text-purple-300"
               >
                 Home
               </Link>
@@ -83,7 +83,7 @@ const Nav = (props) => {
               <Link
                 href="/dashboard"
                 aria-current="page"
-                className="text-purple-500 font-bold"
+                className="text-purple-300 font-bold"
                 prefetch={false}
               >
                 Dashboard
@@ -93,7 +93,7 @@ const Nav = (props) => {
               <Link
                 color="foreground"
                 href="/admit"
-                className="text-purple-500 font-bold"
+                className="text-purple-300 font-bold"
               >
                 Admit
               </Link>

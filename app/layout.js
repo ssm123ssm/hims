@@ -14,8 +14,8 @@ export default async function RootLayout({ children }) {
   const session = await getServerSession();
   console.log(session);
   return (
-    <html lang="en" className="">
-      <body>
+    <html lang="en" className="dark text-foreground bg-background">
+      <body className="">
         <Provider session={session}>{children}</Provider>
       </body>
     </html>
