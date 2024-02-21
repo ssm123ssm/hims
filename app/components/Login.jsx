@@ -58,7 +58,7 @@ const Login_component = () => {
         variant="bordered"
         className="w-[90%] max-w-[400px]"
         onClick={() => {
-          signIn();
+          signIn("google");
         }}
       >
         SSO
