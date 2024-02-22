@@ -2,20 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes neon-glow {
-  0% {
-    opacity: 1;
+@layer base {
+  @keyframes neon-glow {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      border-color: rgb(120, 13, 13);
+      box-shadow: 0 1px 5px 3px rgb(120, 13, 13);
+    }
+    100% {
+      opacity: 1;
+    }
   }
-  50% {
+
+  .animate-neon-glow {
+    animation: neon-glow 1.5s ease-in-out infinite;
+  }
+
+  .neon-glow {
     opacity: 1;
-    border-color: red;
+    border-color: rgb(120, 13, 13);
     box-shadow: 0 1px 5px 3px rgb(120, 13, 13);
   }
-  100% {
-    opacity: 1;
-  }
-}
-
-.animate-neon-glow {
-  animation: neon-glow 1.5s ease-in-out infinite;
 }
