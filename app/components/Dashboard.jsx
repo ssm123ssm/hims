@@ -119,7 +119,7 @@ const Dashboard = () => {
                       bed.date_of_leak_over.slice(-1)[0]?.value &&
                       new Date(bed.date_of_leak_over.slice(-1)[0]?.value) >
                         new Date()
-                        ? "flex w-full my-5 neon-glow lg:animate-neon-glow border-2"
+                        ? "flex w-full my-5 max-lg:neon-glow lg:animate-neon-glow border-1 lg:border-0"
                         : "flex w-full my-5"
                     }
                     shadow="sm"
