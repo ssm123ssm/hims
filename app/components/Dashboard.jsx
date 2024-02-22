@@ -113,7 +113,17 @@ const Dashboard = () => {
               .filter((bed) => bed.visible === true)
               .map((bed) => (
                 <div className="flex w-full justify-center" key={bed._id}>
-                  <Card key={bed._id} className="flex w-full my-5 " shadow="sm">
+                  <Card
+                    key={bed._id}
+                    className={
+                      bed.date_of_leak_over.slice(-1)[0]?.value &&
+                      new Date(bed.date_of_leak_over.slice(-1)[0]?.value) >
+                        new Date()
+                        ? "flex w-full my-5 animate-neon-glow"
+                        : "flex w-full my-5"
+                    }
+                    shadow="sm"
+                  >
                     <div className="flex justify-between items-center mr-3 my-2">
                       <div className="flex">
                         <CardHeader>
