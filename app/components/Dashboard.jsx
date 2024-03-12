@@ -103,7 +103,7 @@ const Dashboard = () => {
 
   return (
     session && (
-      <div className="mb-[80px] flex my-2 mx-3 lg:ml-10 justify-center md:justify-normal h-full overflow-auto w-[90%] p-2">
+      <div className="flex mx-3 lg:ml-10 justify-center md:justify-normal h-full overflow-auto w-[90%] p-2">
         <Scroller />
 
         {bedsLoaded ? (
