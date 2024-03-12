@@ -18,8 +18,8 @@ const Page = () => {
     const fetchBedData = async () => {
       try {
         //simulate a delay
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        console.log("delayed response");
+        //await new Promise((resolve) => setTimeout(resolve, 500));
+        //console.log("delayed response");
         const response = await fetch("/api/beds/bed", {
           method: "POST", // or "GET" depending on your server-side implementation
           headers: {

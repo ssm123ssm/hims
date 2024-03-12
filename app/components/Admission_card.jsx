@@ -18,6 +18,7 @@ import {
   Accordion,
   AccordionItem,
 } from "@nextui-org/react";
+import { Textarea } from "@nextui-org/react";
 
 import React from "react";
 import { set } from "mongoose";
@@ -85,6 +86,7 @@ const Admission_card = () => {
   };
 
   const handleChange = (e, edit) => {
+    console.log(form);
     const value = e.target.value;
     const name = e.target.name;
     const validation = setValidations((pr) => {
@@ -285,10 +287,23 @@ const Admission_card = () => {
                   onChange={handleChange}
                   size="sm"
                 />
+                <div className="w-full flex justify-center">
+                  <Textarea
+                    label="History & Examination findings"
+                    placeholder="Enter the description"
+                    name="hx"
+                    className="w-full"
+                    onChange={handleChange}
+                  />
+                </div>
               </div>
             </CardBody>
           </AccordionItem>
-          <AccordionItem title="Further Investigations" key="2"></AccordionItem>
+          <AccordionItem
+            title="History and Examination findings"
+            key="2"
+            className=""
+          ></AccordionItem>
         </Accordion>
 
         <div

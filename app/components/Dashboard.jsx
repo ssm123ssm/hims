@@ -52,7 +52,7 @@ const Dashboard = () => {
       router.push("/");
       return;
     }
-    console.log("Dashboard component mounted");
+    //console.log("Dashboard component mounted");
     fetch("/api/beds", { next: { revalidate: 0 } })
       .then((response) => response.json())
       .then((data) => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
         });
         setBeds(data.reverse());
         setBedsLoaded(true);
-        console.log(data);
+        //console.log(data);
       });
   }, []);
 
@@ -477,6 +477,23 @@ const Dashboard = () => {
                             </span>
                             <span className="text-stone-400 flex">
                               {bed.ultrasound_findings.slice(-1)[0]?.value}
+                            </span>
+                          </div>
+                        </div>
+                        <div
+                          className={`flex justify-start ${
+                            (bed.hx.slice(-1)[0]?.value == "") |
+                            (bed.hx.slice(-1)[0]?.value == undefined)
+                              ? "hidden"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex flex-col">
+                            <span className="text-gray-500 text-xs flex">
+                              Hx and Ex
+                            </span>
+                            <span className="text-stone-400 flex">
+                              {bed.hx.slice(-1)[0]?.value}
                             </span>
                           </div>
                         </div>

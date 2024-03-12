@@ -17,6 +17,7 @@ import {
   Button,
   Accordion,
   AccordionItem,
+  Textarea,
 } from "@nextui-org/react";
 
 import React from "react";
@@ -62,7 +63,7 @@ const Admission_card = ({ props: data }) => {
           : [{ value, timestamp: Date.now() }],
     }));
 
-    console.log(form);
+    //console.log(form);
   };
 
   const handleCancel = () => {
@@ -295,6 +296,16 @@ const Admission_card = ({ props: data }) => {
                   size="sm"
                   defaultValue={data?.ultrasound_findings[0]?.value}
                 />
+                <div className="w-full flex justify-center">
+                  <Textarea
+                    label="History & Examination findings"
+                    placeholder="Enter the description"
+                    name="hx"
+                    className="w-full"
+                    onChange={handleChange}
+                    defaultValue={data?.hx[0]?.value}
+                  />
+                </div>
               </div>
             </CardBody>
           </AccordionItem>

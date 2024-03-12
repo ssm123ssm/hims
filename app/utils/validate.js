@@ -5,7 +5,7 @@ export const isValid = (value, name) => {
   }
 
   if (name === "first_name") {
-    return value.length > 3;
+    return true;
   } else if (
     name === "age" ||
     name === "bed_number" ||

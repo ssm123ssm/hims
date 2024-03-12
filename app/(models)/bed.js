@@ -27,6 +27,12 @@ const bedSchema = new Schema(
     wbc: [{ value: Number, timestamp: Date }],
     ultrasound_findings: [{ value: String, timestamp: Date }],
     status: [String],
+    hx: [
+      {
+        value: String,
+        timestamp: Date,
+      },
+    ],
   },
   {
     timestamps: true,
