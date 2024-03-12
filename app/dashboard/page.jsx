@@ -10,7 +10,7 @@ const dashboard = () => {
     <>
       <Nav props={{ isVisible: true }} />
 
-      <div className="grid grid-cols-6 lg:grid-cols-8 h-dvh overflow-hidden fixed ">
+      <div className="grid grid-cols-6 lg:grid-cols-8 h-dvh overflow-hidden fixed bg-black">
         <div className="hidden lg:block lg:col-span-2">
           <Sidebar />
         </div>
