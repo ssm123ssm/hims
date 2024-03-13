@@ -7,6 +7,8 @@ import { Autocomplete, AutocompleteItem, Avatar } from "@nextui-org/react";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { Chip, Tooltip } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Remarks_modal from "@/app/components/Remarks_modal";
+import { useDisclosure } from "@nextui-org/react";
 
 import { faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -501,24 +503,7 @@ const Dashboard = () => {
                     </CardBody>
                     <Divider />
                     <div className="flex justify-between text-slate-400 p-4">
-                      <Tooltip content="Full report">
-                        <FontAwesomeIcon
-                          icon={faFileLines}
-                          size="sm"
-                          className="mr-2 flex hover:text-slate-500 hover:cursor-pointer"
-                        />
-                      </Tooltip>
-
-                      <Tooltip content="Details">
-                        <FontAwesomeIcon
-                          icon={faHouse}
-                          size="sm"
-                          className="mr-2 flex hover:text-slate-500 hover:cursor-pointer"
-                          onClick={(e) => {
-                            handleDetails(e, bed._id);
-                          }}
-                        />
-                      </Tooltip>
+                      <Remarks_modal bed={bed} />
 
                       <Tooltip content="Edit">
                         <FontAwesomeIcon

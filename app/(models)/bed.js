@@ -33,6 +33,7 @@ const bedSchema = new Schema(
         timestamp: Date,
       },
     ],
+    remarks: [{ remark: String, timestamp: Date }],
   },
   {
     timestamps: true,
