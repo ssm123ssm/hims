@@ -9,10 +9,15 @@ import {
   useDisclosure,
   Tooltip,
   Input,
+  Checkbox,
+  Badge,
 } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileLines } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
+import {
+  faDeleteLeft,
+  faFileLines,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function App(data) {
   const { isOpen, onOpenChange, onOpen, onClose } = useDisclosure();
@@ -20,18 +25,82 @@ export default function App(data) {
   const [remarks, setRemarks] = useState(bed.remarks);
   const [remark, setRemark] = useState("");
 
+  //get the number of pending remarks
+  const pendingRemarks = remarks.filter(
+    (remark) => remark.status === "pending"
+  ).length;
+
+  const handleStatusChange = (index) => {
+    return async (e) => {
+      const newRemarks = remarks.map((remark, i) => {
+        if (i === index) {
+          return { ...remark, status: e.target.checked ? "done" : "pending" };
+        }
+        return remark;
+      });
+      //setRemarks(newRemarks);
+      const newBed = { ...bed, remarks: newRemarks };
+      const res = await fetch("/api/edit", {
+        method: "POST",
+        body: JSON.stringify({ form: newBed }),
+        "Content-Type": "application/json",
+      });
+
+      if (res.ok) {
+        //setSubmiting(true);
+        setRemarks(newRemarks);
+        setTimeout(() => {
+          console.log("Submitted");
+          //onClose();
+        });
+      }
+    };
+  };
+
+  const handleDeleteRemark = (index) => {
+    return async () => {
+      const newRemarks = remarks.filter((remark, i) => i !== index);
+      console.log(newRemarks);
+      const newBed = { ...bed, remarks: newRemarks };
+      const res = await fetch("/api/edit", {
+        method: "POST",
+        body: JSON.stringify({ form: newBed }),
+        "Content-Type": "application/json",
+      });
+
+      if (res.ok) {
+        //setSubmiting(true);
+        setRemarks(newRemarks);
+        setTimeout(() => {
+          console.log("Submitted");
+          //onClose();
+        }, 0);
+      }
+    };
+  };
+
   const handleAddRemark = async () => {
     let remarkObject;
     if (bed.remarks) {
       remarkObject = [
-        ...bed.remarks,
-        { remark: remark, timestamp: new Date().toISOString() },
+        ...remarks,
+        {
+          remark: remark,
+          timestamp: new Date().toISOString(),
+          status: "pending",
+        },
       ];
     } else {
-      remarkObject = [{ remark: remark, timestamp: new Date().toISOString() }];
+      remarkObject = [
+        {
+          remark: remark,
+          timestamp: new Date().toISOString(),
+          status: "pending",
+        },
+      ];
     }
     const newBed = { ...bed, remarks: remarkObject };
-    console.log(newBed);
+    //console.log(newBed);
     const res = await fetch("/api/edit", {
       method: "POST",
       body: JSON.stringify({ form: newBed }),
@@ -40,10 +109,12 @@ export default function App(data) {
 
     if (res.ok) {
       //setSubmiting(true);
+      setRemark("");
       setRemarks(remarkObject);
+      //onClose();
       setTimeout(() => {
         console.log("Submitted");
-        onClose();
+        //onClose();
       }, 0);
     }
   };
@@ -55,15 +126,25 @@ export default function App(data) {
   return (
     <>
       <Tooltip content="Remarks">
-        <FontAwesomeIcon
-          icon={faFileLines}
-          size="sm"
-          className="mr-2 flex hover:text-slate-500 hover:cursor-pointer"
-          onClick={(e) => {
-            console.log(remarks);
-            onOpen();
-          }}
-        />
+        <Badge
+          isInvisible={
+            !remarks.filter((remark) => remark.status === "pending").length > 0
+          }
+          color="danger"
+          content={
+            remarks.filter((remark) => remark.status === "pending").length
+          }
+        >
+          <FontAwesomeIcon
+            icon={faFileLines}
+            size="sm"
+            className="mr-2 flex hover:text-slate-500 hover:cursor-pointer"
+            onClick={(e) => {
+              console.log(remarks);
+              onOpen();
+            }}
+          />
+        </Badge>
       </Tooltip>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -73,17 +154,35 @@ export default function App(data) {
               <ModalBody>
                 {remarks?.map((remark, index) => {
                   return (
-                    <Input
+                    <div
+                      className="flex justify-between items-center"
                       key={index}
-                      label={`Remark ${index + 1}`}
-                      value={remark.remark}
-                    />
+                    >
+                      <Input
+                        key={index}
+                        label={`Remark ${index + 1}`}
+                        value={remark.remark}
+                        className="w-[80%]"
+                      />
+                      <Checkbox
+                        isSelected={remark.status == "done"}
+                        color={remark.status == "done" ? "success" : "error"}
+                        onChange={handleStatusChange(index)}
+                      ></Checkbox>
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        size="sm"
+                        className="hover:cursor-pointer"
+                        onClick={handleDeleteRemark(index)}
+                      />
+                    </div>
                   );
                 })}
                 <Input
                   label="Remarks"
                   name="remarkInput"
                   onChange={handleRemarkChange}
+                  value={remark}
                 />
               </ModalBody>
               <ModalFooter>
