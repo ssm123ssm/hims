@@ -17,7 +17,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="dark text-foreground bg-background">
+      <body className=" text-foreground bg-background">
         <div>
           <Nav props={{ isVisible: true }} />
 

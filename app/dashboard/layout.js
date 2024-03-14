@@ -13,7 +13,7 @@ export const revalidate = 0;
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="dark text-foreground bg-background">
+      <body className=" text-foreground bg-background">
         <div>{children}</div>
       </body>
     </html>

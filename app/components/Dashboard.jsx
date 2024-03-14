@@ -157,7 +157,7 @@ const Dashboard = () => {
                               )
                             }
 
-                            <span className="text-stone-400 flex max-w-[100px]">
+                            <span className="text-stone-700 flex max-w-[100px]">
                               {bed.first_name.slice(-1)[0]?.value}
                             </span>
                             {bed.age[0]?.value && (
@@ -171,7 +171,7 @@ const Dashboard = () => {
                           <span className="text-gray-500 text-xs">
                             BHT number
                           </span>
-                          <span className="text-stone-400">
+                          <span className="text-stone-700">
                             {bed.bht_number.slice(-1)[0] &&
                               bed.bht_number.slice(-1)[0]?.value}
                           </span>
@@ -195,7 +195,7 @@ const Dashboard = () => {
                           <span className="text-gray-500 text-xs">
                             Fever day
                           </span>
-                          <span className="text-stone-400">
+                          <span className="text-stone-700">
                             {bed.date_of_fever.slice(-1)[0]?.value}
                           </span>
                         </div>
@@ -207,7 +207,7 @@ const Dashboard = () => {
                             <span className="text-gray-500 text-xs flex">
                               NS1 status
                             </span>
-                            <span className="text-stone-400 flex">
+                            <span className="text-stone-700 flex">
                               {bed.ns1_status.slice(-1)[0]?.value ===
                               "Positive" ? (
                                 <FontAwesomeIcon
@@ -233,7 +233,7 @@ const Dashboard = () => {
                           </span>
                           {bed.date_of_leak_over.slice(-1)[0]?.value && (
                             <>
-                              <span className="text-stone-400 text-sm my-1">
+                              <span className="text-stone-700 text-sm my-1">
                                 {
                                   // format (bed.date_of_leak_over.slice(-1)[0]?.value) to readable date
                                   new Date(
@@ -295,7 +295,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">VOTS</span>
                           {bed.vots.slice(-1)[0]?.value && (
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.vots.slice(-1)[0]?.value}%
                             </span>
                           )}
@@ -316,7 +316,7 @@ const Dashboard = () => {
                               Platelets
                             </span>
                             <div className="flex justify-between">
-                              <span className="text-stone-400 flex">
+                              <span className="text-stone-700 flex">
                                 {bed.plt.slice(-1)[0]?.value}
                               </span>
                               <Trend props={{ data: bed.plt, good: "high" }} />
@@ -333,7 +333,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">CRP</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.crp.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.crp, good: "low" }} />
@@ -352,7 +352,7 @@ const Dashboard = () => {
                             Serum creatinine
                           </span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.scr.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.scr, good: "low" }} />
@@ -368,7 +368,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">WBC</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.wbc.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.wbc, good: "high" }} />
@@ -390,7 +390,7 @@ const Dashboard = () => {
                               SGOT
                             </span>
                             <div className="flex flex-r">
-                              <span className="text-stone-400 flex">
+                              <span className="text-stone-700 flex">
                                 {bed.sgot.slice(-1)[0]?.value}
                               </span>
                               <Trend props={{ data: bed.sgot, good: "low" }} />
@@ -407,7 +407,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">SGPT</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.sgpt.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.sgpt, good: "low" }} />
@@ -423,7 +423,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">Hb</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.hb.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.hb, good: "high" }} />
@@ -439,7 +439,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">INR</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.inr.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.inr, good: "low" }} />
@@ -458,7 +458,7 @@ const Dashboard = () => {
                         <div className="flex-col flex">
                           <span className="text-gray-500 text-xs">PCV</span>
                           <div className="flex flex-r">
-                            <span className="text-stone-400">
+                            <span className="text-stone-700">
                               {bed.pcv.slice(-1)[0]?.value}
                             </span>
                             <Trend props={{ data: bed.pcv, good: "high" }} />
@@ -477,7 +477,7 @@ const Dashboard = () => {
                             <span className="text-gray-500 text-xs flex">
                               Ultrasound findings
                             </span>
-                            <span className="text-stone-400 flex">
+                            <span className="text-stone-700 flex">
                               {bed.ultrasound_findings.slice(-1)[0]?.value}
                             </span>
                           </div>
@@ -494,7 +494,7 @@ const Dashboard = () => {
                             <span className="text-gray-500 text-xs flex">
                               Hx and Ex
                             </span>
-                            <span className="text-stone-400 flex">
+                            <span className="text-stone-700 flex">
                               {bed.hx.slice(-1)[0]?.value}
                             </span>
                           </div>
