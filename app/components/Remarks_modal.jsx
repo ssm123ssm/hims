@@ -39,6 +39,7 @@ export default function App(data) {
         return remark;
       });
       //setRemarks(newRemarks);
+      setRemarks(newRemarks);
       const newBed = { ...bed, remarks: newRemarks };
       const res = await fetch("/api/edit", {
         method: "POST",
@@ -48,7 +49,7 @@ export default function App(data) {
 
       if (res.ok) {
         //setSubmiting(true);
-        setRemarks(newRemarks);
+
         setTimeout(() => {
           console.log("Submitted");
           //onClose();
@@ -61,6 +62,7 @@ export default function App(data) {
     return async () => {
       const newRemarks = remarks.filter((remark, i) => i !== index);
       console.log(newRemarks);
+      setRemarks(newRemarks);
       const newBed = { ...bed, remarks: newRemarks };
       const res = await fetch("/api/edit", {
         method: "POST",
@@ -70,7 +72,7 @@ export default function App(data) {
 
       if (res.ok) {
         //setSubmiting(true);
-        setRemarks(newRemarks);
+
         setTimeout(() => {
           console.log("Submitted");
           //onClose();
@@ -99,6 +101,8 @@ export default function App(data) {
         },
       ];
     }
+    setRemark("");
+    setRemarks(remarkObject);
     const newBed = { ...bed, remarks: remarkObject };
     //console.log(newBed);
     const res = await fetch("/api/edit", {
@@ -109,8 +113,7 @@ export default function App(data) {
 
     if (res.ok) {
       //setSubmiting(true);
-      setRemark("");
-      setRemarks(remarkObject);
+
       //onClose();
       setTimeout(() => {
         console.log("Submitted");
